@@ -3,13 +3,14 @@ import Perf from "../../img/user.svg";
 import styled from "styled-components";
 
 const Container = styled.div`
-  border: solid white;
+  padding:0.5% 1%;
+  box-shadow:0px 0px 3px 2px #242424af;
   width: 9%;
 
   color: white;
   position: absolute;
-  top: 8%;
-  right: 0%;
+  top: 10%;
+  right: 2%;
 `;
 const Names = styled.div`
   display: flex;

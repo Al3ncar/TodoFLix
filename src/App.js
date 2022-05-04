@@ -1,5 +1,8 @@
 import React from "react"
-import HeaderCont from "./Component/main/header"
+import "./App.css"
+import NukaSlid from "nuka-carousel" 
+
+import BackHeader from "./img/background-header.png"
 
 import Mod from "./Modais/header/modadd.js"
 import Perf from "./Modais/header/modperf.js"
@@ -8,6 +11,7 @@ import GlobStyle from "./styled"
 import User from "./img/user.svg"
 import Ico from "./img/ico.svg"
 import Sear from "./img/search.svg"
+
 
 import {BrowserRouter as Router, Routes, Route, Link }from 'react-router-dom'
 import Todos from "./pages/todos"
@@ -45,8 +49,7 @@ import styled from "styled-components"
         text-decoration:none;
         display: flex;
         align-items:center;
-        justify-content: space-around;
-        background-color:red;`
+        justify-content: space-around;`
 
     const Search = styled.section`
         width: 50%;
@@ -80,7 +83,6 @@ import styled from "styled-components"
         position: absolute;        
         left:22%;
         z-index:0;`
-
     const DetSum = styled.summary`
         /* deixa o title alinhado */ 
         width: 60%;
@@ -89,7 +91,6 @@ import styled from "styled-components"
         font-size:1.4vw;
         display: flex;
         align-items:center;
-        background-color:blue;
 
         &&::marker{
             color:transparent;
@@ -97,12 +98,12 @@ import styled from "styled-components"
 
     const RoutStyle = styled.ul`
         width:100% ;
+        background-color:black;
         position: relative;
         top:2vh;
         display: flex;
         flex-direction:column ;
-        justify-content:space-between;
-        background-color: yellow;`
+        justify-content:space-between;`
             
     const List = styled.li`
         width:100%;
@@ -143,17 +144,83 @@ import styled from "styled-components"
     const PerfImg = styled.img`
         width:50%;
         `
-    
+    const HeaderCont = styled.header`
+        witdh:100%;
+        height:50vh;
+    `
+    const Cartaz = styled.div`
+    width:50%;
+    padding-top:10%;
+    color:white;`
+    const Card = styled.section`
+    width:100%;
+    display:flex;
+    `
+    const CardTitle = styled.h3`
+    color:white;
+    font-size:1.3vw;
+    padding:3% 0;
+    `
+    const CardOver = styled.p`
+    color:white;
+    `
+    const CardImg = styled.img`
+    width:100%;
+    height:30vh;
+    object-fit:100%;
+    `
+
+    const settings = {
+
+        wrapAround: true,
+        dragging: true,
+        slidesToShow: 4,
+        cellAlign: "center",
+        adaptiveHeight: false,
+        animation:"zoom",
+    }
+    const BackImg = styled.img`
+    width:40vw;
+    height:100%;
+    padding:10%;`
+
+    const NukaBox = styled.div`
+    width:100%;
+    margin:0 0 0 10%;`
+
+  
 export default class App extends React.Component{
     state = {
         addMod: false,
         perfMod: false,
         filmes:[
+
             {
-                title:"M8-Quando a morte socorre a vida",
-                img:"",
-                overview:"", 
+                title:"Monster Hunter",
+                img: "https://www.hometheaterforum.com/community/media/2020-monster-hunter-poster-jpg.9157/full",
+                overview:"A tenente Artemis e seus leais soldados são transportados para um novo mundo, dominado por monstros perigosos ...", 
+            },{
+                title:"Assassin's creed",
+                img: "https://miro.medium.com/max/1400/1*DLgqkUV4NQ37pHLghGWZBQ.jpeg",
+                overview:"Callum Lynch descobre que é descendente de um membro da Ordem dos Assassinos ...", 
+            },{
+                title:"Uncharted",
+                img: "https://empireweekly.com/wp-content/uploads/2022/02/share.jpeg",
+                overview:"Nathan Drake e seu parceiro canastrão Victor Sully Sullivan embarcam em uma perigosa busca para encontrar o maior tesouro jamais encontrado ..."
+            },{
+                title:"Tomb Raider",
+                img: "https://www.10wallpaper.com/wallpaper/1366x768/1712/Tomb_Raider_2018_movies_4K_HD_Poster_1366x768.jpg",
+                overview:"Lara Croft busca seu pai que desapareceu, com a esperança de resolver o mistério do desaparecimento de seu pai ... ", 
+            },{
+                title:"Mortal Kombat",
+                img: "https://1.bp.blogspot.com/-3mosQj6Gmig/YHAqvasHCmI/AAAAAAAAIWY/t7TsO6w17mgtql7LNDoHbi86p47R9L2XgCLcBGAsYHQ/s1200/mk.jfif.jpg",
+                overview:"O lutador de MMA Cole Young não conhece sua herança, nem sabe o motivo do Imperador da Exoterra ter enviado seu melhor guerreiro, Sub-Zero, para ir atrás dele ...", 
+            },{
+                title:"Spider-Man: Miles Morales",
+                img: "https://studiosol-a.akamaihd.net/uploadfile/letras/playlists/8/a/1/2/8a127f024f0a43f5b1268a2c4576a69d.jpg",
+                overview:"Após ser atingido por uma teia radioativa, Miles Morales, um jovem negro do Brooklyn, se torna o Homem-Aranha, inspirado no legado do já falecido Peter Parker ...", 
             }
+
         ]
     }
     handleMod = () => {
@@ -162,66 +229,90 @@ export default class App extends React.Component{
     handleperfMod  = () => {
         this.setState({ perfMod: !this.state.perfMod });
     }
+    
     render(){
         return(
-            <Router>
-                {/* https://xd.adobe.com/view/1b455c60-d418-4576-8729-939693d0f5e2-4e16/specs/ */}
-                <GlobStyle/>
-                <Header>
-                    <TitleFilmes>
-                        <H1>TODOFLIX</H1>
-                        <DownBtn>
-                            <Home to="./">Inicio</Home>
-                        </DownBtn> 
-                        <Box>
-                            <DetSum>
-                                Categoria <PerfImg src={Ico} alt="icone"/>
-                            </DetSum>
-                    
-                            <RoutStyle>
-                                <List>
-                                    <HomeLink to="todos">Todos</HomeLink>
-                                </List>
-                                <List>
-                                    <HomeLink to="favoritos">Favoritos</HomeLink>
-                                </List>
-                                <List>
-                                    <HomeLink to="vistos">Já vistos</HomeLink>
-                                </List>
-                                <List>
-                                    <HomeLink to="adicionados">Adicionados</HomeLink>
-                                </List>
-                            </RoutStyle>
-                        </Box>
-                    </TitleFilmes>
-                    <Search>
+                <Router>
+                    {/* https://xd.adobe.com/view/1b455c60-d418-4576-8729-939693d0f5e2-4e16/specs/ */}
+                    <GlobStyle/>
+                    <Header>
+                        <TitleFilmes>
+                            <H1>TODOFLIX</H1>
+                            <DownBtn>
+                                <Home to="./">Inicio</Home>
+                            </DownBtn>
+                            <Box>
+                                <DetSum>
+                                    Categoria <PerfImg src={Ico} alt="icone"/>
+                                </DetSum>
+            
+                                <RoutStyle>
+                                    <List>
+                                        <HomeLink to="/todos">Todos</HomeLink>
+                                    </List>
+                                    <List>
+                                        <HomeLink to="/favoritos">Favoritos</HomeLink>
+                                    </List>
+                                    <List>
+                                        <HomeLink to="/vistos">Já vistos</HomeLink>
+                                    </List>
+                                    <List>
+                                        <HomeLink to="/adicionados">Adicionados</HomeLink>
+                                    </List>
+                                </RoutStyle>
+                            </Box>
+                        </TitleFilmes>
+                        <Search>
+                            <Addic onClick={this.handleMod}>Adicionar filme</Addic>
+                            {this.state.addMod && <Mod/>}
+                            <BoxSear>
+                                <SearImg src={Sear} alt="Users"/>
+                                <Busc type="text" placeholder="Pesquisar"/>
+                            </BoxSear>
+                            <Prof onClick={this.handleperfMod}>
+                            {this.state.perfMod && <Perf/>}
+                                    <PerfImg src={User} alt="Users"/>
+                                    <Setimg src={Ico} alt="icone"/>
+                            </Prof>
+                            {/* blob:https://xd.adobe.com/e6c19918-fdf5-4c91-8de1-af4ccd0a4c04 */}
+                        </Search>
+                    </Header>
 
-                        <Addic onClick={this.handleMod}>Adicionar filme</Addic>
-                        {this.state.addMod && <Mod/>}
+                    <HeaderCont>
+                <Card>
+                    <div>
+                        <BackImg src={BackHeader} alt=""/>
+                    </div>
+                    <div>
+                        <Cartaz>
+                            <h2>Capitão Fantástico</h2>
+                            <p> 
+                                Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.
+                            </p>
+                            <p><span>4/5</span></p>
+                        </Cartaz>
+                    </div>
+                </Card>
+                <NukaSlid {...settings}>
+                    {this.state.filmes.map((item) => (
+                        <NukaBox>
+                            <CardImg src={item.img} alt={item.title} title={item.title}/>
+                            <CardTitle>{item.title}</CardTitle>
+                            <CardOver>{item.overview}</CardOver>
+                        </NukaBox>
+                    ))}
+                </NukaSlid>
+            </HeaderCont>
 
-                        <BoxSear>
-                            <SearImg src={Sear} alt="Users"/>
-                            <Busc type="text" placeholder="Pesquisar"/>
-                        </BoxSear>
-
-                        <Prof onClick={this.handleperfMod}>
-                        {this.state.perfMod && <Perf/>}    
-                                <PerfImg src={User} alt="Users"/>
-                                <Setimg src={Ico} alt="icone"/>
-                        </Prof>
-                        {/* blob:https://xd.adobe.com/e6c19918-fdf5-4c91-8de1-af4ccd0a4c04 */}
-
-                    </Search>
-                </Header>
-                <HeaderCont/>
-                 <Routes>
-                    <Route path="/todos" element={<Todos/>}/>
-                    <Route path="/favoritos" element={<Favoritos/>}/>
-                    <Route path="/vistos" element={<Vistos/>}/>
-                    <Route path="/adicionados" element={<Add/>}/>
-                 </Routes> 
-                 {/* tooltip - usado no favorito*/}
-            </Router>
+                     <Routes>
+                        <Route path="/todos" element={<Todos/>}/>
+                        <Route path="/favoritos" element={<Favoritos/>}/>
+                        <Route path="/vistos" element={<Vistos/>}/>
+                        <Route path="/adicionados" element={<Add/>}/>
+                     </Routes>
+                     {/* tooltip - usado no favorito*/}
+                </Router>
+            
         )
           
     }

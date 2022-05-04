@@ -16,12 +16,11 @@ const Container = styled.div`
   color: white;
   position: absolute;
   top: 0%;
-  left: 0%;
   z-index:2;
 `
 const Box = styled.div`
   
-  width: 55%;
+  width: 54%;
   height: 80%;
   padding:3.5%;
   box-shadow:0px 0px 3px 2px #242424af;
@@ -85,7 +84,8 @@ const FormFile = styled.form`
   
   const FileImg = styled.img`
   width:100%;
-
+  box-shadow:0px 0px 3px 2px #242424af;
+  margin-bottom:3%;
   ;
 `
 const File = styled.input`
