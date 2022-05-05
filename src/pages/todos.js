@@ -1,51 +1,56 @@
 import React from "react";
+import Sear from "../img/search.svg"
 
-import styled from "styled-components";
-const Adic = styled.h3`
-  color: white;
-`;
-const Cartaz = styled.div`
-    width:50%;
-    padding-top:10%;
-    color:white;`
-    const Card = styled.section`
-    width:100%;
-    display:flex;
+import styled from "styled-components"
+    const Adic = styled.h3`
+      color: white;
+      font-size:2.5vw;
     `
+    const Busc = styled.input`
+    width:26%;
+    padding:4% 0 4% 2.8% ;
+    background-color:#262626;
+    color:white;
+    border:none;
+    outline:0;`
+    const BoxSear = styled.div`
+        width:28.4%;
+        display:flex;
+        padding-left:1% ;
+        margin: 0 2.5%;
+        border-radius:5px;
+        background-color:#262626;
+        position:absolute;
+        top:2.7%;
+        left:58.5%;
+        `
+    const Filmes = styled.div`
+    width:58%;
+    background-color:red;
+    position:relative;
+   `
+   const SearImg = styled.img`
+   width:6%;`
+
     const CardTitle = styled.h3`
     color:white;
-    font-size:1.3vw;
-    padding:3% 0;
+    font-size:1.5vw;
+    padding:3%;
     `
     const CardOver = styled.p`
     color:white;
     `
     const CardImg = styled.img`
-    width:10%;
-    height:30vh;
+    width:100%;
     object-fit:100%;
     `
-
-    const settings = {
-        
-        wrapAround: true,
-        dragging: true,
-        slidesToShow: 4,
-        cellAlign: "center",
-        adaptiveHeight: false,
-        animation:"zoom",
-    }
-    const BackImg = styled.img`
-    width:40vw;
-    height:100%;
-    padding:10%;`
-
     const NukaBox = styled.div`
-    width:100%;
-    margin:0 0 0 10%;`
+    width:25%;
+    padding-left:2%;`
 
 export default class Todos extends React.Component {
   state={
+    filmBusc:[],
     filmes:[
 
       {
@@ -76,19 +81,45 @@ export default class Todos extends React.Component {
 
   ]
   }
+    filter = (event) => {
+      const {filmes} = this.state
+      
+      const  filmfilter = filmes.
+      filter((item) =>{
+              
+        if(item.title.toLowerCase().includes(event.target.value.toLowerCase())){
+            return true;
+            
+        }
+    })
+    this.setState({
+        filmBusc:filmfilter,
+        filmBusc: filmes
+    })
+    
+  }
+  
   render() {
     return (
-      <div>
+      <main>
         <Adic>Todos</Adic>
 
-        {this.state.filmes.map((item) => (
-                        <NukaBox>
-                            <CardImg src={item.img} alt={item.title} title={item.title}/>
-                            <CardTitle>{item.title}</CardTitle>
-                            <CardOver>{item.overview}</CardOver>
-                        </NukaBox>
-                    ))}
-      </div>
+        <BoxSear>
+          <SearImg src={Sear} alt="Users"/>
+          <Busc onChange={this.filter}type="text" placeholder="Pesquisar"/>
+        </BoxSear>
+
+        <div>
+          {this.state.filmBusc.map((item) => (
+            <NukaBox>
+              <CardTitle>{item.title}</CardTitle>
+              <CardImg src={item.img} alt={item.title} title={item.title}/>
+          
+                <CardOver>{item.overview}</CardOver>
+            </NukaBox>
+          ))}
+        </div>
+      </main>
     );
   }
 }

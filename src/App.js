@@ -1,9 +1,6 @@
 import React from "react"
 import "./App.css"
-import NukaSlid from "nuka-carousel" 
-
-import BackHeader from "./img/background-header.png"
-
+import Main from "./Component/main/header"
 import Mod from "./Modais/header/modadd.js"
 import Perf from "./Modais/header/modperf.js"
 import GlobStyle from "./styled"
@@ -142,53 +139,8 @@ import styled from "styled-components"
         margin: 0 5% 0 2%;` 
 
     const PerfImg = styled.img`
-        width:50%;
-        `
-    const HeaderCont = styled.header`
-        witdh:100%;
-        height:50vh;
-    `
-    const Cartaz = styled.div`
-    width:50%;
-    padding-top:10%;
-    color:white;`
-    const Card = styled.section`
-    width:100%;
-    display:flex;
-    `
-    const CardTitle = styled.h3`
-    color:white;
-    font-size:1.3vw;
-    padding:3% 0;
-    `
-    const CardOver = styled.p`
-    color:white;
-    `
-    const CardImg = styled.img`
-    width:100%;
-    height:30vh;
-    object-fit:100%;
-    `
-
-    const settings = {
-
-        wrapAround: true,
-        dragging: true,
-        slidesToShow: 4,
-        cellAlign: "center",
-        adaptiveHeight: false,
-        animation:"zoom",
-    }
-    const BackImg = styled.img`
-    width:40vw;
-    height:100%;
-    padding:10%;`
-
-    const NukaBox = styled.div`
-    width:100%;
-    margin:0 0 0 10%;`
-
-  
+        width:50%;`
+ 
 export default class App extends React.Component{
     state = {
         addMod: false,
@@ -239,9 +191,11 @@ export default class App extends React.Component{
                         <TitleFilmes>
                             <H1>TODOFLIX</H1>
                             <DownBtn>
+                                
                                 <Home to="./">Inicio</Home>
                             </DownBtn>
                             <Box>
+
                                 <DetSum>
                                     Categoria <PerfImg src={Ico} alt="icone"/>
                                 </DetSum>
@@ -260,6 +214,7 @@ export default class App extends React.Component{
                                         <HomeLink to="/adicionados">Adicionados</HomeLink>
                                     </List>
                                 </RoutStyle>
+
                             </Box>
                         </TitleFilmes>
                         <Search>
@@ -278,43 +233,18 @@ export default class App extends React.Component{
                         </Search>
                     </Header>
 
-                    <HeaderCont>
-                <Card>
-                    <div>
-                        <BackImg src={BackHeader} alt=""/>
-                    </div>
-                    <div>
-                        <Cartaz>
-                            <h2>Capitão Fantástico</h2>
-                            <p> 
-                                Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.
-                            </p>
-                            <p><span>4/5</span></p>
-                        </Cartaz>
-                    </div>
-                </Card>
-                <NukaSlid {...settings}>
-                    {this.state.filmes.map((item) => (
-                        <NukaBox>
-                            <CardImg src={item.img} alt={item.title} title={item.title}/>
-                            <CardTitle>{item.title}</CardTitle>
-                            <CardOver>{item.overview}</CardOver>
-                        </NukaBox>
-                    ))}
-                </NukaSlid>
-            </HeaderCont>
-
-                     <Routes>
+                    <Routes>
+                        <Route path="/" element={<Main/>}/>
                         <Route path="/todos" element={<Todos/>}/>
                         <Route path="/favoritos" element={<Favoritos/>}/>
                         <Route path="/vistos" element={<Vistos/>}/>
                         <Route path="/adicionados" element={<Add/>}/>
-                     </Routes>
-                     {/* tooltip - usado no favorito*/}
+                    </Routes>
+
                 </Router>
-            
+
         )
-          
+
     }
-    
+
 }
